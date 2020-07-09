@@ -66,9 +66,14 @@ connectUtil.createLoginHandler = context => {
           client_id: context.options.client_id,
           redirect_uri: context.options.loginRedirectUri,
           scope: context.options.scope,
-          response_type: 'code',
-          sessionToken: req.body.sessionToken
+          response_type: 'code'
         };
+        if(req.body.idpId) {
+          params.idp = req.body.idpId
+        }
+        if(req.body.sessionToken) {
+          params.sessionToken = req.body.sessionToken
+        }        
         req.session[context.options.sessionKey] = {
           nonce,
           state
